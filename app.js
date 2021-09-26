@@ -28,7 +28,9 @@ app.use(errorController.get404);
 
 Product.belongsTo(User, { constrains: true , onDelete: 'CASCADE'});
 
-sequelize.sync({force: true}).then(
+// sequelize.sync({force: true})
+sequelize.sync({force: true})
+.then(
     data => {
         console.log('connected to database');
         app.listen(3000);
