@@ -2,6 +2,7 @@ const Product = require('../models/product');
 const Cart = require('../models/cart');
 
 exports.getProducts = (req, res, next) => {
+  console.log('isaac is \n'+req.user.name)
   Product.findAll()
   .then((products) => { 
     res.render('shop/product-list', {
