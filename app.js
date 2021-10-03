@@ -62,15 +62,18 @@ sequelize
        })
        
     }
-    ).then( user=> {
+ ).then( user=> {
         if (!user) {
             return  User.create({name: 'Isaac', email: 'test@gmail.com'})
         }
         return user
     }
     
-    ).then((user) => {
-        user.createCart();
+).then((user) => {
+       return user.createCart();
+    })
+.then((cart) => {
+        
         console.log('connected to database');
         app.listen(3000);
 })
