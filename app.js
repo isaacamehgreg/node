@@ -70,7 +70,7 @@ sequelize
     }
     
     ).then((user) => {
-       
+        user.createCart();
         console.log('connected to database');
         app.listen(3000);
 })
