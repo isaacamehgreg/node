@@ -59,7 +59,14 @@ exports.getCart = (req, res, next) => {
   //     });
   //   });
   // });
-  console.log(req.user.cart);
+  req.user
+  .getCart()
+  .then(cart =>{
+    console.log(cart);
+  })
+  .catch(function (err) {
+    console.log(err);
+  });
 };
 
 exports.postCart = (req, res, next) => {
