@@ -53,15 +53,11 @@ Product.belongsToMany(Cart, { through: CartItem});
 // sequelize.sync({force: true})
 sequelize
 .sync()
-.then(
-    data => {
-       User.findOne({where: {id: 1}})
-       .then(user => {
-        
-           return user
-       })
+.then(data => {
+    return console.log(User.findByPk(1))
+     User.findByPk(1)
        
-    }
+ }
  ).then( user=> {
         if (!user) {
             return  User.create({name: 'Isaac', email: 'test@gmail.com'})
@@ -69,9 +65,10 @@ sequelize
         return user
     }
     
-).then((user) => {
-       return user.createCart();
-    })
+)
+// .then((user) => {
+//        return user.createCart();
+//     })
 .then((cart) => {
         
         console.log('connected to database');
@@ -80,5 +77,6 @@ sequelize
 .catch((err) =>{
     console.log(err);
 });
+
 
 
