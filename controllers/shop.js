@@ -70,10 +70,19 @@ exports.getCart = (req, res, next) => {
 };
 
 exports.postCart = (req, res, next) => {
- req.user.getCart()
+  const prodId = req.body.productId;
+  req.user.getCart()
  .then((cart) => {
-   console.log(cart);
-  });
+   return cart.getProducts({where: {id: prodId}})
+  })
+  .then((products) => {
+    let product;
+    if(products.length > 0) {
+      product = products[0];
+    }
+    let newQuantity = 1;
+     
+  })
 
   res.redirect('/cart');
 };
