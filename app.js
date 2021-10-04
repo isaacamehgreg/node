@@ -54,11 +54,12 @@ Product.belongsToMany(Cart, { through: CartItem});
 sequelize
 .sync()
 .then(data => {
-    return console.log(User.findByPk(1))
-     User.findByPk(1)
+    
+     User.findByPk(1).then((user) => {return user});
        
  }
  ).then( user=> {
+     console.log(user);
         if (!user) {
             return  User.create({name: 'Isaac', email: 'test@gmail.com'})
         }
@@ -66,9 +67,9 @@ sequelize
     }
     
 )
-// .then((user) => {
-//        return user.createCart();
-//     })
+.then((user) => {
+       return user.createCart();
+    })
 .then((cart) => {
         
         console.log('connected to database');
