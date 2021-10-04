@@ -71,10 +71,9 @@ sequelize
 .then((user) => {
        return user.createCart();
     })
-.then((cart) => {
-        
-        console.log('connected to database');
-        app.listen(3000);
+.then((cart) => {     
+    app.listen(3000);
+    console.log('connected to database');
 })
 .catch((err) =>{
     console.log(err);

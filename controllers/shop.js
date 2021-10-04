@@ -10,7 +10,7 @@ exports.getProducts = (req, res, next) => {
       pageTitle: 'All Products',
       path: '/products'
     });
-  })
+  }).catch((err) => {console.error(err) })
   .catch((err) => {console.error(err); });
 };
 
@@ -41,11 +41,19 @@ exports.getIndex = (req, res, next) => {
 };
 
 exports.getCart = (req, res, next) => {
-
+ 
   req.user
   .getCart()
   .then(cart =>{
-    console.log(cart);
+    return cart
+    .getProduct()
+    .then(products =>{
+      res.render('shop/cart',{
+        path:'/cart',
+        products:products,
+      })
+    })
+    .catch(err => console.log(err));
   })
   .catch(function (err) {
     console.log(err);
@@ -54,9 +62,11 @@ exports.getCart = (req, res, next) => {
 
 exports.postCart = (req, res, next) => {
   const prodId = req.body.productId;
+  let fetchedCart;
   req.user.getCart()
  .then((cart) => {
-   return cart.getProducts({where: {id: prodId}})
+   fetchedCart = cart;
+   return cart.getProduct({where: {id: prodId}})
   })
   .then((products) => {
     let product;
@@ -64,6 +74,14 @@ exports.postCart = (req, res, next) => {
       product = products[0];
     }
     let newQuantity = 1;
+    if (product){
+
+    }
+    return Product.findByPk(prodId)
+    .then(product => {
+      return fetchedCart.addProduct(product, { through: {quantity: newQuantity} });
+    })
+    .catch((err) => {console.log(err)});
      
   })
 
