@@ -55,11 +55,11 @@ sequelize
 .sync()
 .then(data => {
     
-     User.findByPk(1).then((user) => {return user});
-       
+    // User.findByPk(1).then((user) => {return user});
+    return User.findByPk(1)  
  }
  ).then( user=> {
-     console.log(user);
+    // console.log(user);
         if (!user) {
             return  User.create({name: 'Isaac', email: 'test@gmail.com'})
         }

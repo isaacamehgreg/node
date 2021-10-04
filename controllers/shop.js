@@ -70,10 +70,11 @@ exports.getCart = (req, res, next) => {
 };
 
 exports.postCart = (req, res, next) => {
-  const prodId = req.body.productId;
-  Product.findByPk(prodId, product => {
-    Cart.addProduct(prodId, product.price);
+ req.user.getCart()
+ .then((cart) => {
+   console.log(cart);
   });
+
   res.redirect('/cart');
 };
 
